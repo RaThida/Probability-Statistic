@@ -42,3 +42,19 @@ class Num:
         m = self.mean(lst)
         s = self.standard_deviation(lst)
         return [((u - m)/s) for u in lst]
+        
+    def least_square_line(self,x,y):
+        sum_x = sum(x)
+        sum_y = sum(y)
+        sum_x2 = sum([i**2 for i in x])
+        sum_xy = sum([x[i]*y[i] for i in range(len(x))])
+        mean_x = self.mean(x)
+        mean_y = self.mean(y)
+        n = len(x)
+
+        b1 = sum_xy - (sum_x*sum_y)/n
+        b2 = sum_x2 - ((sum_x)**2)/n
+        b = round(b1/b2,4)
+        a = round(mean_y - b*mean_x,4)
+        st = '+' + str(b)+'x' if b >0 else b+'x'
+        return [a,b,f'y = {a}{st}']
